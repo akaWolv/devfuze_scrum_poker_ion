@@ -30,7 +30,7 @@ angular.module('devfuze_poker.services', [])
 })
 
 .factory('socket', function ($rootScope, $location, $timeout, $window) {
-    var socket_host = 'http://localhost:3003';
+    var socket_host = $location.host() + ':3003';
 
     if ('undefined' === typeof io) {
         $rootScope.error_notification = {

@@ -9,6 +9,8 @@ angular.module('DevfuzePoker', ['ionic', 'devfuze_poker.controllers', 'devfuze_p
 
     .run(function ($ionicPlatform, $rootScope, $state, socket, Team, User) {
 
+        $rootScope.socket_available = false;
+
         $rootScope.goToState = function(toState) {
             $state.go(toState);
         }
@@ -107,11 +109,22 @@ angular.module('DevfuzePoker', ['ionic', 'devfuze_poker.controllers', 'devfuze_p
                 StatusBar.styleLightContent();
             }
 
-            tryConnectBySavedDetails();
+            if (false === $rootScope.socket_available) {
+                $rootScope.error_notification.show = true;
+                $rootScope.error_notification.text = 'Socket error... Reconnecting';
+            }
 
-            registerWatchers();
+            $rootScope.$watch('socket_available', function(nv) {
+                if (true === nv) {
+                    $rootScope.error_notification.show = false;
 
-            socket.emit('get_team_details');
+                    tryConnectBySavedDetails();
+
+                    registerWatchers();
+
+                    socket.emit('get_team_details');
+                }
+            });
         });
 
         $rootScope.error_notification = {
@@ -119,7 +132,7 @@ angular.module('DevfuzePoker', ['ionic', 'devfuze_poker.controllers', 'devfuze_p
             text : ''
         }
         $rootScope.$watchCollection('error_notification', function(newValue) {
-            angular.isUndefined(newValue) || console.log('show: ' + newValue.text + ', text: ' + newValue.text);
+            angular.isUndefined(newValue) || false === newValue.show || console.log('show: ' + newValue.text + ', text: ' + newValue.text);
         });
     })
 
