@@ -1,0 +1,113 @@
+<ion-side-menus>
+    <!-- Center content -->
+    <ion-side-menu-content
+            ng-controller="AppTabsCtrl"
+            drag-content="false" >
+        <!-- Main content -->
+        <ion-header-bar class="bar-royal">
+            <button
+                    ng-click="toggleLeft()"
+                    class="button button-icon icon ion-navicon" >
+            </button>
+            <h1 class="title">{{teamName}}</h1>
+            <button
+                    ng-if="true === teamAdminRole"
+                    ng-click="toggleRight()"
+                    class="button button-icon icon ion-gear-a" >
+            </button>
+        </ion-header-bar>
+
+        <ion-tabs class="tabs-icon-top tabs-color-active-positive">
+
+            <!-- Account Tab -->
+            <ion-tab title="Info" icon-off="ion-ios-information-outline" icon-on="ion-ios-information" href="#/app_tabs/account">
+                <ion-nav-view name="tab-dashboard"></ion-nav-view>
+            </ion-tab>
+
+            <!-- Vote Tab -->
+            <ion-tab title="Vote" icon-off="ion-ios-nutrition-outline" icon-on="ion-ios-nutrition" href="#/app_tabs/vote">
+                <ion-nav-view name="tab-vote"></ion-nav-view>
+            </ion-tab>
+
+            <!-- Team Tab -->
+            <ion-tab title="Team" icon-off="ion-ios-people-outline" icon-on="ion-ios-people" href="#/app_tabs/team_members">
+                <ion-nav-view name="tab-team_members"></ion-nav-view>
+            </ion-tab>
+
+        </ion-tabs>
+    </ion-side-menu-content>
+
+    <!-- Left menu -->
+    <ion-side-menu side="left" ng-controller="SessionActionsCtrl" >
+        <ion-header-bar class="bar-dark">
+            <h1 class="title">Settings</h1>
+        </ion-header-bar>
+        <ion-content
+                scroll="false"
+                class="padding"
+                style="background-color: dimgray" >
+            <span style="display: none;">
+                <button
+                        ng-click="changeTeam()"
+                        class="button icon-left ion-ios-people button-full button-large button-positive" >
+                    Change team
+                </button>
+                <button
+                        ng-click="changeUserDetails()"
+                        class="button icon-left ion-ios-person button-full button-large button-calm" >
+                    Change details
+                </button>
+            </span>
+            <button
+                    ng-click="resetDetails()"
+                    class="button icon-left ion-heart-broken button-full button-large button-assertive" >
+                Reset details
+            </button>
+            <button
+                    ng-click="logOut()"
+                    class="button icon-left ion-log-out button-full button-large button-assertive" >
+                Logout
+            </button>
+        </ion-content>
+    </ion-side-menu>
+
+    <!-- Right menu - team admin -->
+    <ion-side-menu side="right" ng-controller="TeamAdminCtrl" ng-if="true === teamAdminRole" >
+        <ion-header-bar class="bar-dark">
+            <h1 class="title">Team Admin</h1>
+        </ion-header-bar>
+        <ion-content
+                scroll="false"
+                class="padding"
+                style="background-color: dimgray" >
+
+            <span ng-if="'open' != teamDetails.voting_status">
+                <button
+                        ng-click="startNewVote()"
+                        class="button button-full button-large button-balanced" >
+                    Start new vote
+                </button>
+            </span>
+
+            <span ng-if="'open' == teamDetails.voting_status">
+                <button
+                        ng-click="startNewVote()"
+                        class="button button-full button-large button-calm" >
+                    Restart vote
+                </button>
+                <button
+                        ng-click="forceFinishVote()"
+                        class="button button-full button-large button-royal" >
+                    Force finish vote
+                </button>
+                <button
+                        ng-click="discardVote()"
+                        class="button button-full button-large button-assertive" >
+                    Discard vote
+                </button>
+            </span>
+
+        </ion-content>
+    </ion-side-menu>
+
+</ion-side-menus>

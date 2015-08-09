@@ -1,0 +1,30 @@
+<ion-header-bar class="bar-royal">
+    <button ng-click="goToState('introduction/welcome')" class="button button-icon icon ion-backspace"></button>
+    <h1 class="title">Pick team</h1>
+</ion-header-bar>
+<ion-content class="padding" style="height: 100%;">
+    <div class="list list-inset">
+        <label class="item item-input">
+            <input type="text" placeholder="Team Name" ng-model="teamName" />
+        </label>
+    </div>
+    <div class="list list-inset">
+        <label class="item item-input">
+            <input type="text" placeholder="Team pass (to share with other members)" ng-model="teamPass" />
+        </label>
+    </div>
+    <div class="list list-inset">
+        <button
+                ng-click="pickTeam(teamName, teamPass)"
+                class="button button-full button-balanced" >
+            Go
+        </button>
+    </div>
+    <div class="list list-inset">
+        <button
+                ng-click="createTeam(teamName, teamPass)"
+                class="button button-full button-calm" >
+            Create team
+        </button>
+    </div>
+</ion-content>

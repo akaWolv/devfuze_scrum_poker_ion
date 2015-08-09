@@ -1,0 +1,15 @@
+<ion-view view-title="Team">
+  <ion-content>
+    <ion-list>
+      <ion-item
+              class="item-remove-animate item-avatar item-icon-right"
+              ng-repeat="teamMember in teamDetails.members"
+              type="item-text-wrap" >
+        <img ng-src="{{'http://www.gravatar.com/avatar/' + teamMember.email_md5 + '?s=40'}}">
+        <i class="icon ion-person icon-accessory" style="{{(teamDetails.admin_email == teamMember.email ? 'color: purple;' : '')}}"></i>
+        <h2>{{teamMember.name}}</h2>
+        <p>{{teamMember.email}}</p>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>

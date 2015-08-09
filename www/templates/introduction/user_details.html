@@ -1,0 +1,26 @@
+<ion-header-bar class="bar-royal">
+    <button ng-click="goToState('introduction/pick_team')" class="button button-icon icon ion-backspace"></button>
+    <h1 class="title">User details</h1>
+</ion-header-bar>
+
+<ion-content class="padding" style="height: 100%;">
+    <form ng-submit="pickUser(userName, userEmail)">
+        <div class="list list-inset">
+            <label class="item item-input">
+                <input type="text" placeholder="First Name" ng-model="userName" />
+            </label>
+        </div>
+        <div class="list list-inset">
+            <label class="item item-input">
+                <input type="text" placeholder="Email" ng-model="userEmail" />
+            </label>
+        </div>
+        <div class="list list-inset">
+            <button
+                    type="submit"
+                    class="button button-full button-balanced" >
+                Go
+            </button>
+        </div>
+    </form>
+</ion-content>

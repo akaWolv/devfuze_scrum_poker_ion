@@ -1,0 +1,86 @@
+<ion-view view-title="Vote">
+    <ion-content class="padding" scroll="false">
+
+        <div class="h-100">
+
+            <div ng-show="'inactive' == teamDetails.voting_status" >
+                <center>
+                    <br />
+
+                    <h3>
+                        Sorry, no voting right now...
+                    </h3>
+
+                    <i class="icon ion-close" style="font-size: 20em; opacity: .3;"></i>
+
+                </center>
+            </div>
+
+            <div ng-show="'open' == teamDetails.voting_status"
+                    class="h-100" >
+                <div ng-show="false === userHasVoted" class="h-100">
+                    <ion-slide-box
+                            on-slide-changed="slideHasChanged($index)"
+                            class="vote-slide-box"
+                            active-slide="pickedPointsIndex" >
+
+                        <ion-slide ng-repeat="point in teamDetails.points">
+                            <div class="vote-box" style="background-color: {{teamDetails.points_colors[point.value]}}">
+                                {{point.value}}
+                            </div>
+                        </ion-slide>
+                    </ion-slide-box>
+                    <button ng-click="confirmVote(pickedPointsIndex)" class="button button-full button-calm">
+                        Confirm
+                    </button>
+                </div>
+                <div ng-show="true === userHasVoted" class="h-100">
+                    <h3>
+                        <center>
+                            You have picked
+                            <span
+                                    class="badge"
+                                    style="background-color: {{teamDetails.points_colors[currentVote.value]}}; color: #000; font-size: 24px; padding: 10px;">
+                                {{currentVote.value}}
+                            </span>
+
+                        </center>
+                    </h3>
+
+                    <button ng-click="changedMind()" class="button button-full button-assertive">
+                        Changed your mind?
+                    </button>
+
+                    <h3>
+                        <center>
+                            waiting for team...
+                        </center>
+                    </h3>
+
+                    <center>
+                        <ion-spinner icon="ripple" class="waiting-for-others"></ion-spinner>
+                    </center>
+
+                    <h3>
+                        <center>
+                            {{teamDetails.number_of_votes_in_current_voting}}/{{teamDetails.number_of_team_members}}
+                        </center>
+                    </h3>
+                </div>
+            </div>
+
+            <div ng-show="'finished' == teamDetails.voting_status">
+                <ion-list>
+                    <ion-item
+                            ng-repeat="teamMember in teamDetails.members"
+                            class="item-avatar item-icon-left" >
+                        <img ng-src="{{'http://www.gravatar.com/avatar/' + teamMember.email_md5 + '?s=40'}}">
+                        <h2 style="line-height: 40px;">{{teamMember.name}}</h2>
+                        <span class="badge" style="background-color: {{teamDetails.points_colors[teamDetails.votes[teamMember.email]]}}; color: #000; top: 12px; right: 15px; font-size: 27px; padding: 15px;">{{teamDetails.votes[teamMember.email]}}</span>
+                    </ion-item>
+                </ion-list>
+            </div>
+        </div>
+
+    </ion-content>
+</ion-view>

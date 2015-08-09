@@ -1,0 +1,44 @@
+<ion-view view-title="Settings">
+    <ion-content class="padding">
+        <form ng-submit="save(userDetails)">
+            <div class="list list-inset">
+                <label class="item item-input">
+                    <i class="icon ion-android-contact placeholder-icon"></i>
+                    <input type="text" placeholder="Name" ng-value="userDetails.name" ng-model="userDetails.name" />
+                </label>
+                <label class="item item-input">
+                    <i class="icon ion-at placeholder-icon"></i>
+                    <input type="email" placeholder="Email" ng-value="userDetails.email" ng-model="userDetails.email" />
+                </label>
+            </div>
+            <div class="list list-inset">
+                <label class="item item-radio">
+                    <input type="radio" name="group">
+                    <div class="item-content">
+                        Go
+                    </div>
+                    <i class="radio-icon ion-checkmark"></i>
+                </label>
+            </div>
+            <div class="list list-inset">
+                <label class="item item-input">
+                    <i class="icon ion-android-contacts placeholder-icon"></i>
+                    <input type="text" placeholder="Team Name" ng-value="userDetails.team" ng-model="userDetails.team" />
+                </label>
+                <label class="item item-input">
+                    <i class="icon ion-android-lock placeholder-icon"></i>
+                    <input type="password" placeholder="Magic Phrase" ng-value="userDetails.pass" ng-model="userDetails.pass" />
+                </label>
+            </div>
+            <div class="list list-inset">
+                <label class="item item-input">
+                    <i class="icon ion-android-contacts placeholder-icon"></i>
+                    <input type="text" placeholder="Team Name" ng-value="userDetails.team" ng-model="userDetails.team" />
+                </label>
+            </div>
+            <div class="padding">
+                <button type="submit" class="button button-block button-positive activated">Save</button>
+            </div>
+        </form>
+    </ion-content>
+</ion-view>

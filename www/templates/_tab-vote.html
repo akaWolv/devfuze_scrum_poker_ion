@@ -1,0 +1,14 @@
+<ion-view view-title="Vote">
+  <ion-content class="padding" scroll="false">
+      <ion-slide-box on-slide-changed="slideHasChanged($index)" class="vote-slide-box">
+          <ion-slide ng-repeat="point in points">
+              <div class="vote-box point-{{point.value}}">
+                  {{point.value}}
+              </div>
+          </ion-slide>
+      </ion-slide-box>
+      <button class="button button-full button-balanced">
+          Confirm
+      </button>
+  </ion-content>
+</ion-view>
