@@ -9,8 +9,6 @@ angular.module('DevfuzePoker', ['ionic', 'devfuze_poker.controllers', 'devfuze_p
 
     .run(function ($ionicPlatform, $rootScope, $state, socket, Team, User) {
 
-        $rootScope.socket_available = false;
-
         $rootScope.goToState = function(toState) {
             $state.go(toState);
         }
@@ -109,22 +107,11 @@ angular.module('DevfuzePoker', ['ionic', 'devfuze_poker.controllers', 'devfuze_p
                 StatusBar.styleLightContent();
             }
 
-            if (false === $rootScope.socket_available) {
-                $rootScope.error_notification.show = true;
-                $rootScope.error_notification.text = 'Socket error... Reconnecting';
-            }
+            tryConnectBySavedDetails();
 
-            $rootScope.$watch('socket_available', function(nv) {
-                if (true === nv) {
-                    $rootScope.error_notification.show = false;
+            registerWatchers();
 
-                    tryConnectBySavedDetails();
-
-                    registerWatchers();
-
-                    socket.emit('get_team_details');
-                }
-            });
+            socket.emit('get_team_details');
         });
 
         $rootScope.error_notification = {
